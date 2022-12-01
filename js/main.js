@@ -55,7 +55,7 @@ function showProducts() {
         td = $("<td></td>").text(product.modifiedDate);
         tr.append(td);
         
-        td = $("<td></td>").html(`<button type="button" onclick='Edit(this);' class="btn btn-secondary">Edit</button> <button onclick='deleteRow(this);' class="btn btn-danger">Delete</button>`);
+        td = $("<td></td>").html(`<button type="button" id="editBtn" onclick='Edit(this);' class="btn btn-secondary">Edit</button> <button onclick='deleteRow(this);' class="btn btn-danger">Delete</button>`);
         tr.append(td);
 
         product.tr = tr;
@@ -137,7 +137,7 @@ $("#btnSubmit").click(function(e) {
     td = $("<td></td>").text(product.modifiedDate);
     tr.append(td);
   
-    td = $("<td></td>").html(`<button type="button" onclick='Edit(this);' class="btn btn-secondary">Edit</button> <button onclick='deleteRow(this);' class="btn btn-danger">Delete</button>`);
+    td = $("<td></td>").html(`<button type="button" id="editBtn" onclick='Edit(this);' class="btn btn-secondary">Edit</button> <button onclick='deleteRow(this);' class="btn btn-danger">Delete</button>`);
     tr.append(td);
 
     product.tr = tr;
@@ -183,20 +183,28 @@ function deleteRow(btn) {
 
 /*Edit button */
 
-const tr = document.querySelector('.productData');
 
 function Edit(btn) {
   
-    let button = document.getElementsByTagName("button");
-    let row = btn.parentNode.parentNode;
-    let nameId = $(row).children()[0];
-   
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = nameId.textContent;
-    input.className = 'form-control';
-    tr.insertBefore(input, nameId);
-    tr.removeChild(nameId);
+    const tr = btn.parentNode.parentNode;
+ 
+    if(btn.textContent === 'Edit') {
+        const span = $(tr).children()[0];
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = span.textContent;
+        input.className = 'form-control inputedit';
+        tr.insertBefore(input, span);
+        tr.removeChild(span);
+        btn.textContent = 'Save';
 
+    } else if (btn.textContent === 'Save') {
+        const input = tr.firstElementChild;
+        const span = document.createElement('td');
+        span.textContent = input.value;
+        tr.insertBefore(span, input);
+        tr.removeChild(input);
+        btn.textContent = 'Edit';
+      }
    
 };

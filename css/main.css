@@ -20,5 +20,8 @@ html, body, head, div, ul, li, a, p, br, h1, h2, h3, h4, h5 { margin: 0px; paddi
 .comsoon img { float: left; margin-right: 90px; }
 .comsoon a { font-size: 18px; line-height: 300px; color: #337ab7; text-decoration: none; }
 
+/*inputedit*/
+.inputedit { width: 80%; margin-top: 12px; }
+
 /*footer*/
 .footer { padding: 15px; border-top: 1px solid #ddd; color: #333; }
